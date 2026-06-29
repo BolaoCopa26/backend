@@ -51,9 +51,7 @@ RUN mkdir -p /var/www/html/storage/framework/cache/data \
     && chmod -R 775 /var/www/html/storage \
     && chmod -R 775 /var/www/html/bootstrap/cache
 
-# Run Laravel Optimization Commands
-RUN php artisan config:cache \
-    && php artisan view:cache
+# Note: config:cache must be run at runtime (in start.sh) to pick up environment variables
 # Note: route:cache not executed due to presence of Closures in routes/web.php
 
 # Copy Nginx config
