@@ -15,8 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User creation removed to prevent wiping/creating random test users during seed
-
+        // Ensure admin user exists
+        User::updateOrCreate(
+            ['name' => 'admin'],
+            [
+                'password' => \Illuminate\Support\Facades\Hash::make('senhaBOLAOCOPA26#'),
+                'is_admin' => true,
+            ]
+        );
         $this->call([
             GameSeeder::class,
         ]);
