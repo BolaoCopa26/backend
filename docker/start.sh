@@ -15,6 +15,9 @@ php artisan view:cache
 timeout 60s php artisan migrate --force || echo "Migration failed or timed out"
 timeout 60s php artisan db:seed --force || echo "Seeder failed or timed out"
 
+# Fix log permissions because root user might have created laravel.log during migration
+chown -R www-data:www-data /var/www/html/storage/logs
+
 # Start PHP-FPM in background
 php-fpm &
 
