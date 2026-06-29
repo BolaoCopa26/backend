@@ -12,7 +12,7 @@ timeout 60s php artisan migrate --force || echo "Migration failed or timed out"
 timeout 60s php artisan db:seed --force || echo "Seeder failed or timed out"
 
 # Start PHP-FPM in background
-php-fpm -D
+php-fpm &
 
 # Start Nginx in foreground
 nginx -g "daemon off;"
