@@ -7,6 +7,9 @@ use App\Http\Controllers\PredictionController;
 use App\Http\Controllers\AuthController;
 
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/login', function () {
+    return response()->json(['message' => 'Unauthenticated.'], 401);
+})->name('login');
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function () {
