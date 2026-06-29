@@ -42,8 +42,11 @@ RUN npm install && npm run build
 # Install backend dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Setup Permissions
-RUN chown -R www-data:www-data /var/www/html \
+# Setup Permissions and ensure directories exist
+RUN mkdir -p /var/www/html/storage/framework/cache/data \
+    && mkdir -p /var/www/html/storage/framework/sessions \
+    && mkdir -p /var/www/html/storage/framework/views \
+    && chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage \
     && chmod -R 775 /var/www/html/bootstrap/cache
 
