@@ -56,7 +56,8 @@ RUN php artisan config:cache \
 # Note: route:cache not executed due to presence of Closures in routes/web.php
 
 # Copy Nginx config
-COPY docker/nginx.conf /etc/nginx/sites-available/default
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
+RUN rm -f /etc/nginx/sites-enabled/default
 
 # Make start.sh executable
 RUN chmod +x docker/start.sh
