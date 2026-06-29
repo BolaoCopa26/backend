@@ -6,6 +6,10 @@ PORT="${PORT:-8080}"
 # Replace the port in Nginx configuration
 sed -i "s/listen 8080;/listen ${PORT};/g" /etc/nginx/sites-available/default
 
+# Run Laravel migrations and seeders automatically
+php artisan migrate --force
+php artisan db:seed --force
+
 # Start PHP-FPM in background
 php-fpm -D
 

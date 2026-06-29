@@ -79,7 +79,14 @@ class GameSeeder extends Seeder
         ];
 
         foreach ($games as $game) {
-            Game::create($game);
+            Game::updateOrCreate(
+                [
+                    'team_a' => $game['team_a'],
+                    'team_b' => $game['team_b'],
+                    'stage' => $game['stage']
+                ],
+                $game
+            );
         }
     }
 
