@@ -18,7 +18,7 @@ Route::get('/setup-db', function () {
         $output .= "\nSeeders: " . \Illuminate\Support\Facades\Artisan::output();
         
         return "<pre>" . $output . "</pre>";
-    } catch (\Exception $e) {
+    } catch (\Throwable $e) {
         return "<pre>DB Error: " . $e->getMessage() . "\n\nPlease check your Render Environment Variables (DB_HOST, DB_PORT=4000, DB_USERNAME, etc).</pre>";
     }
 });
