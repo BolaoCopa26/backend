@@ -19,7 +19,12 @@ class PredictionController extends Controller
 
         $game = \App\Models\Game::findOrFail($request->game_id);
 
-        if (now()->greaterThanOrEqualTo($game->match_date)) {
+        // Precisamos pegar a string bruta do banco para o Laravel não tentar converter de UTC automaticamente.
+        $dateString = $game->getRawOriginal('match_date');
+        $matchDate = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $dateString, 'America/Sao_Paulo');
+        $currentTime = now('America/Sao_Paulo');
+
+        if ($currentTime->greaterThanOrEqualTo($matchDate)) {
             return response()->json(['message' => 'O jogo já começou ou já passou. Não é possível palpitar.'], 403);
         }
 
